@@ -1,4 +1,5 @@
 const express = require("express");
+const { booking } = require("./bookings");
 const app = express();
 
 app.get("/", (req, res) => {
@@ -6,7 +7,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/book", (req, res) => {
-  res.status(200).send("Got a GET bookings.");
+  res.status(200).json(booking);
 });
 
 app.post("/book", (req, res) => {
