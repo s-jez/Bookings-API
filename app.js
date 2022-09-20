@@ -14,15 +14,15 @@ app.post("/book", (req, res) => {
 });
 
 app.get("/book/:id", (req, res) => {
-  res.status(200).send("Got a GET via ID bookings.");
+  res.status(200).send(`Got a GET ID ${req.params.id} booking.`);
 });
 
 app.put("/book/:id", (req, res) => {
-  res.status(200).send("Got a PUT via ID bookings.");
+  res.status(200).send(`Got a PUT ID ${req.params.id} booking.`);
 });
 
 app.delete("/book/:id", (req, res) => {
-  res.status(200).send("Got a DELETE via ID bookings.");
+  res.status(200).send(`Got a DELETE ID ${req.params.id} booking.`);
 });
 
 app.listen(3000, () => {
