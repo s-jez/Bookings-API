@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bookings</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  </head>
+  <body>
+    <form action="POST" action="/book">
+      <div class="container">
+        <h3>Bookings - form</h3>
+        <div class="form-group">
+          <label for="guest">Guest:</label>
+          <input
+            class="form-control"
+            name="guest"
+            id="guest"
+            placeholder="Enter your guest name..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="guestNum">Amount of guests</label>
+          <input
+            type="number"
+            class="form-control"
+            name="guestNum"
+            id="guestNum"
+            min="1"
+            value="1"
+            max="4"
+          />
+        </div>
+        <div class="form-group">
+          <label for="nights">Amount of nights</label>
+          <input
+            type="number"
+            class="form-control"
+            name="nights"
+            id="nights"
+            min="1"
+            value="1"
+            max="30"
+          />
+        </div>
+        <div class="form-group">
+          <label for="date">ArrivalDate</label>
+          <input
+            type="date"
+            class="form-control"
+            name="arrivalDate"
+            id="date"
+            min="2022-09-21"
+          />
+          <!-- JavaScript for min value... -->
+        </div>
+        <button type="submit" class="btn btn-primary mt-2 mb-2">Submit</button>
+      </div>
+    </form>
+  </body>
+</html>

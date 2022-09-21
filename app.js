@@ -1,17 +1,37 @@
+const bodyParser = require("body-parser");
 const express = require("express");
-const { booking } = require("./bookings");
+const cors = require("cors");
 const app = express();
+const path = require("path");
+const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.status(200).send("<h3>Hello World!</h3>");
+// We will keep bookings objects in array
+let bookings = [];
+
+app.use(cors());
+app.use("/static", express.static(path.join(__dirname, "public")));
+
+app.use(
+  "/css",
+  express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))
+);
+
+// Configure body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.get("", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/bookings.html"));
 });
 
 app.get("/book", (req, res) => {
-  res.status(200).json(booking);
+  res.status(200).json(bookings);
 });
 
 app.post("/book", (req, res) => {
-  res.status(200).send("Got a POST bookings.");
+  const booking = req.body;
+  bookings.push(booking);
+  res.status(200).send("Booking added!!");
 });
 
 app.get("/book/:id", (req, res) => {
@@ -26,6 +46,6 @@ app.delete("/book/:id", (req, res) => {
   res.status(200).send(`Got a DELETE ID ${req.params.id} booking.`);
 });
 
-app.listen(3000, () => {
-  console.log(`Example app listening on port 3000`);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });
