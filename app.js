@@ -6,7 +6,7 @@ const path = require("path");
 const port = process.env.PORT || 3000;
 
 // We will keep bookings objects in array
-let bookings = [];
+const bookings = [];
 
 app.use(cors());
 app.use("/static", express.static(path.join(__dirname, "public")));
@@ -20,12 +20,15 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/bookings.html"));
 });
 
+app.get("/bookings", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/bookings-list.html"));
+});
 app.get("/book", (req, res) => {
-  res.status(200).json(bookings);
+  res.json(bookings);
 });
 
 app.post("/book", (req, res) => {
