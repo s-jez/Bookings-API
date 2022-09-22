@@ -3,10 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
+const { dbConnection } = require("./db");
 const port = process.env.PORT || 3000;
 
 // We will keep bookings objects in array
 const bookings = [];
+
+// Connect to DB
+dbConnection;
 
 app.use(cors());
 app.use("/static", express.static(path.join(__dirname, "public")));
