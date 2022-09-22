@@ -34,7 +34,8 @@ app.get("/book", (req, res) => {
 app.post("/book", (req, res) => {
   const booking = req.body;
   bookings.push(booking);
-  res.status(200).send("Booking added!!");
+  res.status(200);
+  res.redirect("/bookings");
 });
 
 app.get("/book/:id", (req, res) => {
