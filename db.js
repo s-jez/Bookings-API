@@ -18,22 +18,16 @@ const dbConnection = async () => {
     port: DATABASE_PORT,
   });
   await client.connect();
-  const getGuests = () => {
-    const promise = new Promise((resolve, reject) => {
-      client.query("SELECT * FROM guests;", (err, res, fields) => {
-        if (err) reject(err);
-        resolve(res);
-      });
-    });
-    return promise;
-  };
   try {
-    const guestsData = await getGuests();
+    const guestsData = await client.query("SELECT * FROM guests;");
     console.log(guestsData);
+    return guestsData;
   } finally {
     await client.end();
   }
 };
 dbConnection().catch(console.error);
 
-module.exports = dbConnection;
+module.exports = {
+  dbConnection,
+};

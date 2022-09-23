@@ -33,8 +33,8 @@ app.get("/bookings", (req, res) => {
   res.sendFile(path.join(__dirname, "public/bookings-list.html"));
 });
 app.get("/book", (req, res) => {
+  const guestsData = dbConnection();
   console.log(guestsData);
-  res.json(bookings);
 });
 
 app.post("/book", (req, res) => {
