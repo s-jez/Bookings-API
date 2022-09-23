@@ -9,25 +9,29 @@ const DATABASE_PORT = process.env.DATABASE_PORT;
 
 const { Client } = require("pg");
 
+const client = new Client({
+  user: DATABASE_USER,
+  password: DATABASE_PASS,
+  database: DATABASE_NAME,
+  host: DATABASE_HOST,
+  port: DATABASE_PORT,
+});
 const dbConnection = async () => {
-  const client = new Client({
-    user: DATABASE_USER,
-    password: DATABASE_PASS,
-    database: DATABASE_NAME,
-    host: DATABASE_HOST,
-    port: DATABASE_PORT,
-  });
   await client.connect();
+};
+dbConnection().catch(console.error);
+const getGuests = async () => {
   try {
     const guestsData = await client.query("SELECT * FROM guests;");
     console.log(guestsData);
     return guestsData;
-  } finally {
-    await client.end();
+  } catch (error) {
+    console.log(error);
+    client.end();
   }
 };
-dbConnection().catch(console.error);
 
 module.exports = {
   dbConnection,
+  getGuests,
 };

@@ -3,7 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-const { dbConnection } = require("./db");
+const { dbConnection, getGuests } = require("./db");
+const { response } = require("express");
 const port = process.env.PORT || 3000;
 
 // We will keep bookings objects in array
@@ -32,9 +33,10 @@ app.get("/", (req, res) => {
 app.get("/bookings", (req, res) => {
   res.sendFile(path.join(__dirname, "public/bookings-list.html"));
 });
-app.get("/book", (req, res) => {
-  const guestsData = dbConnection();
-  console.log(guestsData);
+app.get("/guests", (req, res) => {
+  getGuests().then((data) => {
+    res.json(data.rows);
+  });
 });
 
 app.post("/book", (req, res) => {
