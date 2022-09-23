@@ -5,6 +5,9 @@ const loadBookings = () => {
       console.log(data);
       for (let book of data) {
         console.log(book);
+        const bookDate = new Date(book.guest_arrival_date).toLocaleDateString(
+          "en-US"
+        );
         const tmpl = `
             <div class="col-4">
               <div class="card-body">
@@ -14,7 +17,7 @@ const loadBookings = () => {
                 <div>Nights: ${book.guest_nights}</div>
                 <div>Price: ${book.guest_price}$</div>
                 <hr />
-                <div>Date: ${book.guest_arrival_date}</div>
+                <div>Date: ${bookDate}</div>
                 <div>Message: ${book.guest_message}</div>
                 <hr />
               </div>
