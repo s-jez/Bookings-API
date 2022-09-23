@@ -1,20 +1,21 @@
 const loadBookings = () => {
-  fetch("http://localhost:3000/book")
+  fetch("http://localhost:3000/guests")
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
       for (let book of data) {
+        console.log(book);
         const tmpl = `
             <div class="col-4">
               <div class="card-body">
-                <h4 class="card-title">${book.guest}</h4>
+                <h4 class="card-title">${book.id}. ${book.guest_name}</h4>
                 <hr />
-                <div>Guests: ${book.guestNum}</div>
-                <div>Nights: ${book.nights}</div>
-                <div>Price: ${book.price}$</div>
+                <div>Guests: ${book.guest_amount}</div>
+                <div>Nights: ${book.guest_nights}</div>
+                <div>Price: ${book.guest_price}$</div>
                 <hr />
-                <div>Date: ${book.arrivalDate}</div>
-                <div>Message: ${book.message}</div>
+                <div>Date: ${book.guest_arrival_date}</div>
+                <div>Message: ${book.guest_message}</div>
                 <hr />
               </div>
             </div>
