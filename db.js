@@ -18,8 +18,18 @@ const dbConnection = async () => {
     port: DATABASE_PORT,
   });
   await client.connect();
+  const getGuests = () => {
+    const promise = new Promise((resolve, reject) => {
+      client.query("SELECT * FROM guests;", (err, res, fields) => {
+        if (err) reject(err);
+        resolve(res);
+      });
+    });
+    return promise;
+  };
   try {
-    console.log(await client.query("SELECT * FROM guests;"));
+    const guestsData = await getGuests();
+    console.log(guestsData);
   } finally {
     await client.end();
   }

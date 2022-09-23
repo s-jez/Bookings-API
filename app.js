@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 
 // We will keep bookings objects in array
 const bookings = [];
+let guestsData = [];
 
 // Connect to DB
 dbConnection;
@@ -32,6 +33,7 @@ app.get("/bookings", (req, res) => {
   res.sendFile(path.join(__dirname, "public/bookings-list.html"));
 });
 app.get("/book", (req, res) => {
+  console.log(guestsData);
   res.json(bookings);
 });
 
