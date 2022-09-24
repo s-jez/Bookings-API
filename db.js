@@ -30,6 +30,16 @@ const getGuests = async () => {
     client.end();
   }
 };
+const insertGuests = async (data) => {
+  try {
+    const guestsData = await client.query(
+      `INSERT INTO guests() VALUES ${data}`
+    );
+    console.log(guestsData);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   dbConnection,
