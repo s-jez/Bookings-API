@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-const { dbConnection, getGuests } = require("./db");
+const { dbConnection, getGuests, insertGuests } = require("./db");
 const { response } = require("express");
 const port = process.env.PORT || 3000;
 
@@ -42,8 +42,9 @@ app.get("/guests", (req, res) => {
 app.post("/book", (req, res) => {
   const booking = req.body;
   bookings.push(booking);
-  res.status(200);
-  res.redirect("/bookings");
+  insertGuests(booking).then(() => {
+    res.status(200).json(booking);
+  });
 });
 
 app.get("/book/:id", (req, res) => {
