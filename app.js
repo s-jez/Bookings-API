@@ -4,17 +4,18 @@ const cors = require("cors");
 const app = express();
 const path = require("path");
 const { dbConnection, getGuests, insertGuests } = require("./db");
-const { response } = require("express");
 const port = process.env.PORT || 3000;
-
-// We will keep bookings objects in array
-const bookings = [];
-let guestsData = [];
 
 // Connect to DB
 dbConnection;
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use("/static", express.static(path.join(__dirname, "public")));
 
 app.use(
@@ -40,10 +41,27 @@ app.get("/guests", (req, res) => {
 });
 
 app.post("/book", (req, res) => {
-  const booking = req.body;
-  bookings.push(booking);
+  const booking = {
+    name: req.body.guest,
+    amount: req.body.guestNum,
+    message: req.body.message,
+    nights: req.body.nights,
+    arrival_date: req.body.arrivalDate,
+    price: req.body.price,
+  };
+  if (
+    booking.name === "" ||
+    booking.amount === "" ||
+    booking.message === "" ||
+    booking.nights === "" ||
+    booking.arrival_date === "" ||
+    booking.price === ""
+  ) {
+    res.json("Please fill your empty form fields!");
+    return;
+  }
   insertGuests(booking).then(() => {
-    res.status(200).json(booking);
+    res.status(200).redirect("/bookings");
   });
 });
 
@@ -60,5 +78,5 @@ app.delete("/book/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });

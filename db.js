@@ -31,19 +31,17 @@ const getGuests = async () => {
   }
 };
 const insertGuests = async (data) => {
-  const guest = {
-    name: data.guest_name,
-    amount: data.guest_amount,
-    message: data.guest_message,
-    nights: data.guest_nights,
-    arrival_date: data.guest_arrival_date,
-    price: data.guest_price,
-  };
   try {
     const guestsData = await client.query(
-      `INSERT INTO guests
-      (guest_name, guest_amount, guest_message, guest_nights, guest_arrival_date, guest_price) 
-      VALUES (${guest.name}, ${guest.amount}, ${guest.message}, ${guest.nights}, ${guest.arrival_date}, ${guest.price});`
+      `INSERT INTO guests(guest_name, guest_amount, guest_message, guest_nights, guest_arrival_date, guest_price) VALUES ($1, $2, $3, $4, $5, $6);`,
+      [
+        data.name,
+        data.amount,
+        data.message,
+        data.nights,
+        data.arrival_date,
+        data.price,
+      ]
     );
     console.log(guestsData);
   } catch (error) {
