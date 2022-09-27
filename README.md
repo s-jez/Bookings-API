@@ -1,14 +1,32 @@
 
 
 ## Bookings-API
-Simple API for hotel / apartment to store details of reservations.
+Simple API in Node.JS for hotel to store details of guests reservations. <br />
+Database PostgreSQL and Bootstrap for styling <br />
 
-#### Get all bookings
+## Guests
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `guest_name`      | `string` | **Required**|
+| `guest_amount`      | `Number` | **Required**|
+| `guest_message`      | `string` | **Required**|
+| `guest_nights`      | `Number` | **Required**|
+| `guest_arrival_date`      | `Date` | **Required**|
+| `guest_price`      | `Number` | **Required**|
+
+#### Get all guests bookings
 
 ```
   GET /book
 ```
-#### Get booking by id
+
+#### POST booking
+
+```
+  POST /book
+```
+
+#### Get booking
 
 ```
   GET /book/:id
@@ -25,17 +43,4 @@ Simple API for hotel / apartment to store details of reservations.
 ```
   DELETE /book/:id
 ```
-
-#### POST booking
-
-```
-  POST /book
-```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `reservation`      | `string` | **Required**|
-| `name`      | `string` | **Required**|
-| `arrival`      | `Date` | **Required**|
-| `price`      | `Number` | **Required**|
 
