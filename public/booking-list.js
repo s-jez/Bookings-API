@@ -21,6 +21,10 @@ const loadBookings = () => {
                 <div>Message: ${book.guest_message}</div>
                 <hr />
               </div>
+              <div class="card-buttons">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Update</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">Delete</button>
+              </div>
             </div>
           `;
         document.getElementById("bookings").innerHTML += tmpl;
