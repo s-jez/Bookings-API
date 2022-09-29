@@ -31,4 +31,15 @@ const loadBookings = () => {
       }
     });
 };
+const updateBooking = (id) => {
+  fetch(`http://localhost:3000/book/${id}`, {
+    method: "PUT",
+  });
+};
+const deleteBooking = (id) => {
+  fetch(`http://localhost:3000/book/${id}`, {
+    method: "DELETE",
+  });
+};
+
 loadBookings();
