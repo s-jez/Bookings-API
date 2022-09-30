@@ -22,27 +22,14 @@ const loadBookings = () => {
                 <hr />
               </div>
               <div class="card-buttons">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Update</button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">Delete</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-id="${book.id}" data-target="#exampleModal">Update</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-id="${book.id}" data-target="#exampleModal2">Delete</button>
               </div>
             </div>
           `;
         document.getElementById("bookings").innerHTML += tmpl;
       }
     });
-};
-
-const updateBooking = (id) => {
-  fetch(`http://localhost:3000/book/${id}`, {
-    method: "PUT",
-  });
-  console.log("Current booking id: ", id);
-};
-const deleteBooking = (id) => {
-  fetch(`http://localhost:3000/book/${id}`, {
-    method: "DELETE",
-  });
-  console.log("Current booking id: ", id);
 };
 
 loadBookings();
