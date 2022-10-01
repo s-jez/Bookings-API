@@ -30,6 +30,18 @@ const getGuests = async () => {
     client.end();
   }
 };
+const getGuestById = async (id) => {
+  try {
+    const guestsData = await client.query(
+      `SELECT * FROM guests WHERE id=${id}`
+    );
+    console.log(guestsData);
+    return guestsData;
+  } catch (error) {
+    console.log(error);
+    client.end();
+  }
+};
 const insertGuests = async (data) => {
   try {
     const guestsData = await client.query(
@@ -46,30 +58,34 @@ const insertGuests = async (data) => {
     console.log(guestsData);
   } catch (error) {
     console.log(error);
+    client.end();
   }
 };
-const updateGuest = async (data) => {
+const updateGuest = async (id) => {
   try {
     const guestData = await client.query(
-      `UPDATE guests SET guest_name = ${data.guest_name}, guest_amount = ${data.guest_amount}, guest_message = ${data.guest_message}, guest_nights = ${data.guest_nights}, guest_arrival_date = ${data.guest_arrival_date}, guest_price = ${data.guest_price}`
+      `UPDATE guests SET guest_name = ${data.guest_name}, guest_amount = ${data.guest_amount}, guest_message = ${data.guest_message}, guest_nights = ${data.guest_nights}, guest_arrival_date = ${data.guest_arrival_date}, guest_price = ${data.guest_price} WHERE id=${id}`
     );
-    console.log(guestData);
+    return guestData;
   } catch (error) {
     console.log(error);
+    client.end();
   }
 };
 const deleteGuest = async (id) => {
   try {
     const guestData = await client.query(`DELETE FROM guests WHERE id=${id}`);
-    console.log(guestData);
+    return guestData;
   } catch (error) {
     console.log(error);
+    client.end();
   }
 };
 
 module.exports = {
   dbConnection,
   getGuests,
+  getGuestById,
   insertGuests,
   updateGuest,
   deleteGuest,

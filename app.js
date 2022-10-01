@@ -3,7 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-const { dbConnection, getGuests, insertGuests } = require("./db");
+const {
+  dbConnection,
+  getGuests,
+  insertGuests,
+  updateGuest,
+  deleteGuest,
+  getGuestById,
+} = require("./db");
 const port = process.env.PORT || 3000;
 
 // Connect to DB
@@ -66,15 +73,21 @@ app.post("/book", (req, res) => {
 });
 
 app.get("/book/:id", (req, res) => {
-  res.status(200).send(`Got a GET ID ${req.params.id} booking.`);
+  getGuestById(req.params.id).then((data) => {
+    res.json(data);
+  });
 });
 
 app.put("/book/:id", (req, res) => {
-  res.status(200).send(`Got a PUT ID ${req.params.id} booking.`);
+  updateGuest(req.params.id).then((data) => {
+    res.json(`Booking updated: ${data}`);
+  });
 });
 
 app.delete("/book/:id", (req, res) => {
-  res.status(200).send(`Got a DELETE ID ${req.params.id} booking.`);
+  deleteGuest(req.params.id).then((data) => {
+    res.json(`Booking deleted: ${data}`);
+  });
 });
 
 app.listen(port, () => {
