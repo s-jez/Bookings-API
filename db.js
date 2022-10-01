@@ -48,9 +48,29 @@ const insertGuests = async (data) => {
     console.log(error);
   }
 };
+const updateGuest = async (data) => {
+  try {
+    const guestData = await client.query(
+      `UPDATE guests SET guest_name = ${data.guest_name}, guest_amount = ${data.guest_amount}, guest_message = ${data.guest_message}, guest_nights = ${data.guest_nights}, guest_arrival_date = ${data.guest_arrival_date}, guest_price = ${data.guest_price}`
+    );
+    console.log(guestData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+const deleteGuest = async (id) => {
+  try {
+    const guestData = await client.query(`DELETE FROM guests WHERE id=${id}`);
+    console.log(guestData);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   dbConnection,
   getGuests,
   insertGuests,
+  updateGuest,
+  deleteGuest,
 };
